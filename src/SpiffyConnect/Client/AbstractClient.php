@@ -98,6 +98,23 @@ abstract class AbstractClient implements ClientInterface
     }
 
     /**
+     * Force a redirect and exit.
+     *
+     * @param Response $response
+     */
+    public function redirect(Response $response)
+    {
+        if (!$response instanceof PhpResponse) {
+            $string   = $response->toString();
+            $response = new PhpResponse();
+            $response->fromString($string);
+        }
+
+        $response->send();
+        exit;
+    }
+
+    /**
      * Throws an exception if one of the required options is not present.
      *
      * @param array $options

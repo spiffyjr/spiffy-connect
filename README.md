@@ -1,6 +1,7 @@
 # SpiffyConnect
 
-SpiffyConnect is a connector implementing OAuth1 and OAuth2 to make communicating with service providers as easy as possible.
+SpiffyConnect is a connector implementing OAuth1 and OAuth2 to make communicating with service providers as easy as
+possible.
 
 ## Project Status
 [![Master Branch Build Status](https://secure.travis-ci.org/spiffyjr/spiffy-connect.png?branch=master)](http://travis-ci.org/spiffyjr/spiffy-connect)

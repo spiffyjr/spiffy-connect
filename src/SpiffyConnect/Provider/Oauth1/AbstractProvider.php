@@ -43,7 +43,7 @@ abstract class AbstractProvider implements ProviderInterface
      */
     public function request($uri, $method = HttpRequest::METHOD_GET, array $params = null)
     {
-        return $this->getClient()->request($this->getAccessToken(), $uri, $method, $params);
+        return $this->getClient()->request($uri, $this->getAccessToken(), $method, $params);
     }
 
     /**

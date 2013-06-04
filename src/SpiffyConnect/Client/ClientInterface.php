@@ -28,12 +28,4 @@ interface ClientInterface
      * @return HttpClient
      */
     public function getHttpClient();
-
-    /**
-     * Parses a query string into an array.
-     *
-     * @param string $query
-     * @return array
-     */
-    public function parseQueryString($query);
 }

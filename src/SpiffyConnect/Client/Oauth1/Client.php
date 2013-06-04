@@ -9,6 +9,7 @@ use SpiffyConnect\Client\Oauth1\Token\RequestToken;
 use SpiffyConnect\Client\Oauth1\Token\TokenInterface;
 use Zend\Http\Client as HttpClient;
 use Zend\Http\PhpEnvironment\Request as PhpRequest;
+use Zend\Http\PhpEnvironment\Response as PhpResponse;
 use Zend\Http\Response as HttpResponse;
 use Zend\Http\Request as HttpRequest;
 use Zend\Uri\Uri;
@@ -57,13 +58,13 @@ class Client extends AbstractClient
     /**
      * Sent an OAuth request.
      *
-     * @param AccessToken $token
      * @param string $uri
+     * @param AccessToken $token
      * @param string $method
      * @param array|null $params
      * @return HttpResponse
      */
-    public function request(AccessToken $token, $uri, $method = HttpRequest::METHOD_GET, array $params = null)
+    public function request($uri, AccessToken $token, $method = HttpRequest::METHOD_GET, array $params = null)
     {
         return $this->prepareClient($uri, $method, $params, $token)->send();
     }

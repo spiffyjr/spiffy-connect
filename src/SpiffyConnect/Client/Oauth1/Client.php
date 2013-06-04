@@ -331,7 +331,7 @@ class Client extends AbstractClient
     {
         ksort($params);
 
-        return http_build_query($params, null, '&', PHP_QUERY_RFC3986);
+        return $this->httpBuildQuery3986($params);
     }
 
     /**

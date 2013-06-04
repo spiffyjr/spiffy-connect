@@ -81,6 +81,23 @@ abstract class AbstractClient implements ClientInterface
     }
 
     /**
+     * PHP 5.3.3 version of http_build_query with enctype set to PHP_QUERY_RFC3986.
+     *
+     * @param array $params
+     * @param string $sep
+     * @return string
+     */
+    public function httpBuildQuery3986(array $params, $sep = '&')
+    {
+        $parts = array();
+        foreach ($params as $key => $value) {
+            $parts[] = sprintf('%s=%s', $key, rawurlencode($value));
+        }
+
+        return implode($sep, $parts);
+    }
+
+    /**
      * Throws an exception if one of the required options is not present.
      *
      * @param array $options

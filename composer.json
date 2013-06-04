@@ -1,7 +1,7 @@
 {
-    "name": "spiffy/spiffy-social",
+    "name": "spiffy/spiffy-connect",
     "description": "SpiffyConnect is a connector implementing OAuth1 and OAuth2 to make communicating with service providers as easy as possible.",
-    "homepage": "http://www.github.com/spiffyjr/spiffy-social.git",
+    "homepage": "http://www.github.com/spiffyjr/spiffy-connect.git",
     "require": {
         "php": ">=5.4",
         "zendframework/zend-crypt": "2.*",

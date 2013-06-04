@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "cc69a2d13ded12e0f1320786dd00ddbf",
+    "hash": "d83ad6e44fa63e593f782a1159093afb",
     "packages": [
         {
             "name": "zendframework/zend-crypt",
@@ -1034,7 +1034,7 @@
         "spiffy/spiffy-test": 20
     },
     "platform": {
-        "php": ">=5.4"
+        "php": ">=5.3.3"
     },
     "platform-dev": [
 

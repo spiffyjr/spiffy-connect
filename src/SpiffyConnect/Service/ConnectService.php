@@ -54,7 +54,10 @@ class ConnectService
             echo 'no provider';
             exit;
         }
-        return $this->providers[$name];
+        $provider = $this->providers[$name];
+        $provider->getOptions()->setRedirectUri($this->getEndpointUri());
+
+        return $provider;
     }
 
     /**

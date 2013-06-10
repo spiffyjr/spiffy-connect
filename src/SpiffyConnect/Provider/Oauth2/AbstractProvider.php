@@ -134,6 +134,7 @@ abstract class AbstractProvider implements ProviderInterface
         $token = $this->getClient()->getAccessToken(
             $this->getOptions()->getAccessTokenUri(),
             $cache,
+            'POST',
             $this->getOptions()->getAccessTokenParameters()
         );
 

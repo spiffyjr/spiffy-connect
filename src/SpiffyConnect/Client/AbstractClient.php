@@ -3,6 +3,7 @@
 namespace SpiffyConnect\Client;
 
 use Zend\Http\Client as HttpClient;
+use Zend\Http\Client\Adapter\Curl;
 use Zend\Http\Request as HttpRequest;
 use Zend\Http\Response as HttpResponse;
 use Zend\Json\Json;
@@ -55,6 +56,9 @@ abstract class AbstractClient implements ClientInterface
     {
         if (!$this->httpClient) {
             $this->httpClient = new HttpClient();
+
+            // todo: figure out a way to pass options to the http client
+            $this->httpClient->setAdapter(new Curl());
         }
         return $this->httpClient;
     }

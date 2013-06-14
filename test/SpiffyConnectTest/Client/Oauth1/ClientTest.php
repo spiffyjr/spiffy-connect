@@ -11,6 +11,9 @@ use Zend\Http\Response;
 
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @covers Oauth1::getRequestToken
+     */
     public function testRequestTokenExceptionOnInvalidResponse()
     {
         $this->setExpectedException('SpiffyConnect\Client\Exception\InvalidResponseException');
@@ -19,6 +22,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $client->getRequestToken('http://www.foo.com/oauth/request');
     }
 
+    /**
+     * @covers Oauth1::getRequestToken
+     */
     public function testRequestToken()
     {
         $client = $this->getTestClient('request');
@@ -29,6 +35,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $client->getRequestToken('http://www.foo.com/oauth/request');
     }
 
+    /**
+     * @covers Oauth1::getRedirectResponse
+     */
     public function testRedirectResponse()
     {
         $client = new Client();
@@ -42,6 +51,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(302, $response->getStatusCode());
     }
 
+    /**
+     * @covers Oauth1::setRequestAuthorizationHeader
+     */
     public function testSetRequestAuthorizationHeader()
     {
         $request = new Request();
@@ -69,6 +81,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $request->getHeader('Authorization')->toString());
     }
 
+    /**
+     * @covers Oauth1::getAuthorizationHeader
+     */
     public function testAuthorizationHeader()
     {
         $client = new Client(array(
@@ -98,6 +113,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $header);
     }
 
+    /**
+     * @covers Oauth1::getParameterString
+     */
     public function testParameterString()
     {
         $client = new Client();
@@ -114,6 +132,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $result);
     }
 
+    /**
+     * @covers Oauth1::getSignatureString
+     */
     public function testSignatureString()
     {
         $client = new Client();
@@ -132,6 +153,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($result, $expected);
     }
 
+    /**
+     * @covers Oauth1::getSigningKey
+     */
     public function testSigningKey()
     {
         $client       = new Client(array('client_secret' => 'foobar'));
@@ -150,6 +174,9 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $client->getSigningKey();
     }
 
+    /**
+     * @covers Oauth1::generateSignature
+     */
     public function testHmacSignatureGenerator()
     {
         $client = new Client(array(

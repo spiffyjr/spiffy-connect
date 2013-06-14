@@ -11,6 +11,7 @@
     "require-dev": {
         "mockery/mockery": "0.*",
         "phpunit/phpunit": "3.*",
+        "satooshi/php-coveralls": "dev-master",
         "spiffy/spiffy-test": "dev-master"
     },
     "autoload": {

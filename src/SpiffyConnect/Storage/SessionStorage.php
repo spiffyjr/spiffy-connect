@@ -39,10 +39,8 @@ class SessionStorage implements StorageInterface
     protected $member = self::MEMBER_DEFAULT;
 
     /**
-     * Sets session storage options and initializes session namespace object
-     *
-     * @param  mixed $namespace
-     * @param  mixed $member
+     * @param  string $namespace
+     * @param  string $member
      * @param  SessionManager $manager
      */
     public function __construct($namespace = null, $member = null, SessionManager $manager = null)
@@ -57,8 +55,6 @@ class SessionStorage implements StorageInterface
     }
 
     /**
-     * Returns the session namespace
-     *
      * @return string
      */
     public function getNamespace()
@@ -67,8 +63,6 @@ class SessionStorage implements StorageInterface
     }
 
     /**
-     * Returns the name of the session object member
-     *
      * @return string
      */
     public function getMember()
@@ -77,8 +71,6 @@ class SessionStorage implements StorageInterface
     }
 
     /**
-     * Defined by Zend\Authentication\Storage\StorageInterface
-     *
      * @return bool
      */
     public function isEmpty()
@@ -87,9 +79,7 @@ class SessionStorage implements StorageInterface
     }
 
     /**
-     * Defined by Zend\Authentication\Storage\StorageInterface
-     *
-     * @return mixed
+     * {@inheritDoc}
      */
     public function read()
     {
@@ -97,10 +87,7 @@ class SessionStorage implements StorageInterface
     }
 
     /**
-     * Defined by Zend\Authentication\Storage\StorageInterface
-     *
-     * @param  mixed $contents
-     * @return void
+     * {@inheritDoc}
      */
     public function write($contents)
     {
@@ -108,8 +95,6 @@ class SessionStorage implements StorageInterface
     }
 
     /**
-     * Defined by Zend\Authentication\Storage\StorageInterface
-     *
      * @return void
      */
     public function clear()

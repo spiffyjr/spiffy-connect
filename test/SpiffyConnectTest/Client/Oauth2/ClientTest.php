@@ -51,7 +51,20 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRedirectResponse()
     {
-        
+        $client   = $this->getTestClient('empty');
+        $response = $client->getRedirectResponse('http://www.foo.bar');
+        $this->assertInstanceOf('Zend\Stdlib\ResponseInterface', $response);
+        $this->assertEquals(
+            'Location: http://www.foo.bar/?client_id=id&redirect_uri=http%3A%2F%2Flocalhost%3A8080&scope=foobarrrrrr',
+            $response->getHeaders()->get('Location')->toString()
+        );
+
+        $response = $client->getRedirectResponse('http://www.foo.bar', array('myparam' => 'iscool'));
+        $this->assertInstanceOf('Zend\Stdlib\ResponseInterface', $response);
+        $this->assertEquals(
+            'Location: http://www.foo.bar/?myparam=iscool&client_id=id&redirect_uri=http%3A%2F%2Flocalhost%3A8080&scope=foobarrrrrr',
+            $response->getHeaders()->get('Location')->toString()
+        );
     }
 
     /**
@@ -88,7 +101,8 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $client   = new Client(array(
             'client_id'     => 'id',
             'client_secret' => 'secret',
-            'redirect_uri'  => 'http://localhost:8080'
+            'redirect_uri'  => 'http://localhost:8080',
+            'scope'         => 'foobarrrrrr'
         ));
         $adapter = new TestAdapter();
         $client->getHttpClient()->setAdapter($adapter);

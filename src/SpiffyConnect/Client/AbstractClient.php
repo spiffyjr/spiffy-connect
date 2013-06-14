@@ -54,11 +54,8 @@ abstract class AbstractClient implements ClientInterface
      */
     public function getHttpClient()
     {
-        if (!$this->httpClient) {
+        if (!$this->httpClient instanceof HttpClient) {
             $this->httpClient = new HttpClient();
-
-            // todo: figure out a way to pass options to the http client
-            $this->httpClient->setAdapter(new Curl());
         }
         return $this->httpClient;
     }

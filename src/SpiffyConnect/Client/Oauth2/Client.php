@@ -115,16 +115,23 @@ class Client extends AbstractClient
      * Creates an access token.
      *
      * @param Response $response
+     * @throws Exception\InvalidAccessTokenException
      * @return AccessToken
      */
     protected function createAccessToken(Response $response)
     {
-        $options = $this->getOptions();
-        $content = $this->decodeResponse($response, $options->getResponseFormat());
+        $options    = $this->getOptions();
+        $content    = $this->decodeResponse($response, $options->getResponseFormat());
+        $expiresKey = $options->getExpireTimeKey();
+        $accessKey  = $options->getAccessTokenKey();
+
+        if (!isset($content[$accessKey])) {
+            throw new Exception\InvalidAccessTokenException('missing access token from response');
+        }
 
         return new AccessToken(array(
-            'access_token' => $content[$options->getAccessTokenKey()],
-            'expire_time'  => $content[$options->getExpireTimeKey()],
+            'access_token' => $content[$accessKey],
+            'expire_time'  => isset($content[$expiresKey]) ? $content[$expiresKey] : null,
         ));
     }
 

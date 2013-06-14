@@ -6,7 +6,8 @@ possible. SpiffyConnect is designed to have a consistent API between clients (oa
 
 ## Project Status
 [![Master Branch Build Status](https://secure.travis-ci.org/spiffyjr/spiffy-connect.png?branch=master)](http://travis-ci.org/spiffyjr/spiffy-connect)
-
+[![Coverage Status](https://coveralls.io/repos/spiffyjr/spiffy-connect/badge.png?branch=master)](https://coveralls.io/r/spiffyjr/spiffy-connect?branch=master)
+[![Dependency Status](https://www.versioneye.com/user/projects/51adf3da33f9dd0002007e85/badge.png)](https://www.versioneye.com/user/projects/51adf3da33f9dd0002007e85)
 
 ## Documentation
 

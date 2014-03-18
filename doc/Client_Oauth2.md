@@ -46,7 +46,7 @@ After you have an authorization code you need to exchange it for an access token
 
 $code = $client->getAuthorizationCode();
 if ($code) {
-    $token = $client->getAccessToken('https://www.myprovider.com/oauth/access_token', $code);
+    $token = $client->requestToken('https://www.myprovider.com/oauth/access_token', $code);
     $_SESSION['ACCESS_TOKEN'] = $token;
 } else {
     // code isn't available for some reason!

@@ -14,6 +14,11 @@ class ClientOptions extends AbstractOptions
     /**
      * @var string
      */
+    protected $oauthEndpoint = 'oauth';
+
+    /**
+     * @var string
+     */
     protected $clientId;
 
     /**
@@ -184,5 +189,21 @@ class ClientOptions extends AbstractOptions
     public function getRefreshTokenKey()
     {
         return $this->refreshTokenKey;
+    }
+
+    /**
+     * @param string $oauthEndpoint
+     */
+    public function setOAuthEndpoint($oauthEndpoint)
+    {
+        $this->oauthEndpoint = $oauthEndpoint;
+    }
+
+    /**
+     * @return string
+     */
+    public function getOAuthEndpoint()
+    {
+        return $this->oauthEndpoint;
     }
 }

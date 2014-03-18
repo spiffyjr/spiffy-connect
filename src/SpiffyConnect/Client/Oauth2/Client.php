@@ -13,6 +13,11 @@ use Zend\Uri\Uri;
 class Client extends AbstractClient
 {
     /**
+     * @var AccessToken
+     */
+    protected $accessToken;
+
+    /**
      * @param array|null|\Traversable $options
      */
     public function __construct($options = null)
@@ -22,42 +27,53 @@ class Client extends AbstractClient
 
     /**
      * @param string $uri
-     * @param AccessToken $token
      * @param string $method
      * @param array|null $params
      * @return Response
      * @throws Exception\InvalidAccessTokenException
      */
-    public function request($uri, AccessToken $token, array $params = null, $method = HttpRequest::METHOD_GET)
+    public function request($uri, array $params = null, $method = HttpRequest::METHOD_GET)
     {
-        if (!$token->isValid()) {
-            throw new Exception\InvalidAccessTokenException();
-        }
-
-        return $this->prepareHttpClient($uri, $method, $params, $token)->send();
+        return $this->prepareHttpClient($uri, $method, $params)->send();
     }
 
     /**
-     * @param string $uri
      * @param string $method
      * @param array|null $params
      * @return AccessToken
      */
-    public function getAccessToken($uri, array $params = null, $method = HttpRequest::METHOD_POST)
+    public function requestToken(array $params = null, $method = HttpRequest::METHOD_POST)
     {
         $this->assertRequiredOptions(array('client_id', 'client_secret'));
 
-        $options = $this->getOptions();
-
-        $params['client_id']     = $options->getClientId();
-        $params['client_secret'] = $options->getClientSecret();
+        $params['client_id']     = $this->options->getClientId();
+        $params['client_secret'] = $this->options->getClientSecret();
 
         $client = $this->getHttpClient();
         $client->setMethod($method);
-        $client->setUri($this->options->getBaseUri() . '/' . $uri);
+        $client->setUri($this->options->getBaseUri() . '/' . $this->options->getOAuthEndpoint());
         $client->setParameterPost($params);
 
         return $this->createAccessToken($client->send());
+    }
+
+    /**
+     * @throws Exception\InvalidAccessTokenException
+     */
+    public function requestTokenRefresh()
+    {
+        $token = $this->getAccessToken();
+
+        if (!$token->getRefreshToken()) {
+            throw new Exception\InvalidAccessTokenException();
+        }
+
+        $refreshToken = $token->getRefreshToken();
+
+        $token = $this->requestToken(['grant_type' => 'refresh_token', 'refresh_token' => $token->getRefreshToken()]);
+        $token->setRefreshToken($refreshToken);
+
+        $this->setAccessToken($token);
     }
 
     /**
@@ -65,7 +81,7 @@ class Client extends AbstractClient
      *
      * @return null|AuthorizationCode
      */
-    public function getAuthorizationCode()
+    public function requestAuthorizationCode()
     {
         $request = new PhpRequest();
         $query   = $request->getQuery();
@@ -89,7 +105,7 @@ class Client extends AbstractClient
     {
         $this->assertRequiredOptions(array('client_id', 'redirect_uri', 'scope'));
 
-        $options = $this->getOptions();
+        $options = $this->options;
 
         $params['client_id']    = $options->getClientId();
         $params['redirect_uri'] = $options->getRedirectUri();
@@ -108,6 +124,25 @@ class Client extends AbstractClient
     }
 
     /**
+     * @param AccessToken $accessToken
+     */
+    public function setAccessToken(AccessToken $accessToken)
+    {
+        $this->accessToken = $accessToken;
+    }
+
+    /**
+     * @return AccessToken
+     */
+    public function getAccessToken()
+    {
+        if (!$this->accessToken instanceof AccessToken) {
+            $this->accessToken = new AccessToken();
+        }
+        return $this->accessToken;
+    }
+
+    /**
      * Creates an access token.
      *
      * @param Response $response
@@ -116,7 +151,7 @@ class Client extends AbstractClient
      */
     protected function createAccessToken(Response $response)
     {
-        $options    = $this->getOptions();
+        $options    = $this->options;
         $content    = $this->decodeResponse($response, $options->getFormat());
         $expiresKey = $options->getExpireTimeKey();
         $accessKey  = $options->getAccessTokenKey();
@@ -128,7 +163,7 @@ class Client extends AbstractClient
 
         return new AccessToken(array(
             'access_token' => $content[$accessKey],
-            'expire_time'  => isset($content[$expiresKey]) ? $content[$expiresKey] : null,
+            'expires_in'  => isset($content[$expiresKey]) ? $content[$expiresKey] : null,
             'refresh_token' => isset($content[$refreshKey]) ? $content[$refreshKey] : null,
         ));
     }
@@ -139,16 +174,23 @@ class Client extends AbstractClient
      * @param string $uri
      * @param string $method
      * @param array|null $params
-     * @param AccessToken|null $token
+     * @throws Exception\InvalidAccessTokenException
      * @return HttpClient
      */
     protected function prepareHttpClient(
         $uri,
         $method = HttpRequest::METHOD_POST,
-        array $params = null,
-        AccessToken $token = null
+        array $params = null
     ) {
-        $params['access_token'] = $token->getAccessToken();
-        return parent::prepareHttpClient($uri, $method, $params);
+        $token = $this->getAccessToken();
+        if (!$token->isValid()) {
+            $this->requestTokenRefresh();
+        }
+
+        $client = parent::prepareHttpClient($this->options->getBaseUri() . '/' . $uri, $method, $params);
+        $headers = $client->getRequest()->getHeaders();
+        $headers->addHeaderLine(sprintf('Authorization: Bearer %s', $token->getAccessToken()));
+
+        return $client;
     }
 }

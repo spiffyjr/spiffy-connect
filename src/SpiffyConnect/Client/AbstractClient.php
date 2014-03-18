@@ -17,9 +17,30 @@ abstract class AbstractClient implements ClientInterface
     protected $httpClient;
 
     /**
+     * @var string
+     */
+    protected $baseUri;
+
+    /**
      * @var AbstractOptions
      */
     protected $options;
+
+    /**
+     * @param string $baseUri
+     */
+    public function setBaseUri($baseUri)
+    {
+        $this->baseUri = $baseUri;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBaseUri()
+    {
+        return $this->baseUri;
+    }
 
     /**
      * @param AbstractOptions $options

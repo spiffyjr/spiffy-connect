@@ -25,7 +25,7 @@ class AccessToken extends AbstractOptions
     /**
      * @var int
      */
-    protected $expireTime;
+    protected $expiresIn;
 
     /**
      * @param null $options
@@ -42,7 +42,7 @@ class AccessToken extends AbstractOptions
      */
     public function isValid()
     {
-        return null === $this->expireTime || (time() < $this->getCreationTime() + $this->getExpireTime());
+        return null === $this->expiresIn || (time() > $this->getCreationTime() + $this->getExpiresIn());
     }
 
     /**
@@ -55,20 +55,20 @@ class AccessToken extends AbstractOptions
 
 
     /**
-     * @param int $expireTime
+     * @param int $expiresIn
      * @return AccessToken
      */
-    public function setExpireTime($expireTime)
+    public function setExpiresIn($expiresIn)
     {
-        $this->expireTime = $expireTime;
+        $this->expiresIn = $expiresIn;
     }
 
     /**
      * @return int
      */
-    public function getExpireTime()
+    public function getExpiresIn()
     {
-        return $this->expireTime;
+        return $this->expiresIn;
     }
 
     /**

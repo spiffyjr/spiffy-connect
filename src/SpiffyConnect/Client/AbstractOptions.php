@@ -12,6 +12,11 @@ abstract class AbstractOptions extends BaseAbstractOptions
     protected $format = 'json';
 
     /**
+     * @var string
+     */
+    protected $baseUri;
+
+    /**
      * @param string $format
      */
     public function setFormat($format)
@@ -25,5 +30,21 @@ abstract class AbstractOptions extends BaseAbstractOptions
     public function getFormat()
     {
         return $this->format;
+    }
+
+    /**
+     * @param string $baseUri
+     */
+    public function setBaseUri($baseUri)
+    {
+        $this->baseUri = $baseUri;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBaseUri()
+    {
+        return $this->baseUri;
     }
 }

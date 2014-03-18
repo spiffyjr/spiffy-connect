@@ -1,12 +1,12 @@
 <?php
 
-namespace SpiffyConnect\Client\Oauth1;
+namespace SpiffyConnect\Client\OAuth1;
 
 use SpiffyConnect\Client\AbstractClient;
 use SpiffyConnect\Client\Exception;
-use SpiffyConnect\Client\Oauth1\Token\AccessToken;
-use SpiffyConnect\Client\Oauth1\Token\RequestToken;
-use SpiffyConnect\Client\Oauth1\Token\TokenInterface;
+use SpiffyConnect\Client\OAuth1\Token\AccessToken;
+use SpiffyConnect\Client\OAuth1\Token\RequestToken;
+use SpiffyConnect\Client\OAuth1\Token\TokenInterface;
 use Zend\Http\Client as HttpClient;
 use Zend\Http\PhpEnvironment\Request as PhpRequest;
 use Zend\Http\PhpEnvironment\Response as PhpResponse;
@@ -44,7 +44,7 @@ class Client extends AbstractClient
      * @var array
      */
     protected $signatureClassmap = array(
-        ClientOptions::SIGNATURE_HMAC_SHA1 => 'SpiffyConnect\Client\Oauth1\Signature\HmacSha1Signature'
+        ClientOptions::SIGNATURE_HMAC_SHA1 => 'SpiffyConnect\Client\OAuth1\Signature\HmacSha1Signature'
     );
 
     /**
@@ -338,7 +338,7 @@ class Client extends AbstractClient
     /**
      * @param string $method
      * @throws Exception\InvalidSignatureMethod
-     * @return \SpiffyConnect\Client\Oauth1\Signature\SignatureInterface
+     * @return \SpiffyConnect\Client\OAuth1\Signature\SignatureInterface
      */
     protected function getSigner($method)
     {

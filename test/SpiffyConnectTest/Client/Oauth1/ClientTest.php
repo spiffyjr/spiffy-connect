@@ -1,10 +1,10 @@
 <?php
 
-namespace SpiffyConnectTest\Client\Oauth1;
+namespace SpiffyConnectTest\Client\OAuth1;
 
-use SpiffyConnect\Client\Oauth1\Client;
-use SpiffyConnect\Client\Oauth1\Token\AccessToken;
-use SpiffyConnect\Client\Oauth1\Token\RequestToken;
+use SpiffyConnect\Client\OAuth1\Client;
+use SpiffyConnect\Client\OAuth1\Token\AccessToken;
+use SpiffyConnect\Client\OAuth1\Token\RequestToken;
 use Zend\Http\Client\Adapter\Test as TestAdapter;
 use Zend\Http\Request;
 use Zend\Http\Response;
@@ -12,7 +12,7 @@ use Zend\Http\Response;
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers SpiffyConnect\Client\Oauth1\Client::getRequestToken
+     * @covers SpiffyConnect\Client\OAuth1\Client::getRequestToken
      */
     public function testRequestTokenExceptionOnInvalidResponse()
     {
@@ -23,7 +23,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers SpiffyConnect\Client\Oauth1\Client::getRequestToken
+     * @covers SpiffyConnect\Client\OAuth1\Client::getRequestToken
      */
     public function testRequestToken()
     {
@@ -36,7 +36,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers SpiffyConnect\Client\Oauth1\Client::getRedirectResponse
+     * @covers SpiffyConnect\Client\OAuth1\Client::getRedirectResponse
      */
     public function testRedirectResponse()
     {
@@ -52,7 +52,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers SpiffyConnect\Client\Oauth1\Client::setRequestAuthorizationHeader
+     * @covers SpiffyConnect\Client\OAuth1\Client::setRequestAuthorizationHeader
      */
     public function testSetRequestAuthorizationHeader()
     {
@@ -82,7 +82,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers SpiffyConnect\Client\Oauth1\Client::generateAuthorizationHeader
+     * @covers SpiffyConnect\Client\OAuth1\Client::generateAuthorizationHeader
      */
     public function testAuthorizationHeader()
     {
@@ -114,7 +114,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers SpiffyConnect\Client\Oauth1\Client::getParameterString
+     * @covers SpiffyConnect\Client\OAuth1\Client::getParameterString
      */
     public function testParameterString()
     {
@@ -133,7 +133,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers SpiffyConnect\Client\Oauth1\Client::getSignatureString
+     * @covers SpiffyConnect\Client\OAuth1\Client::getSignatureString
      */
     public function testSignatureString()
     {
@@ -154,7 +154,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers SpiffyConnect\Client\Oauth1\Client::getSigningKey
+     * @covers SpiffyConnect\Client\OAuth1\Client::getSigningKey
      */
     public function testSigningKey()
     {
@@ -175,7 +175,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers SpiffyConnect\Client\Oauth1\Client::generateSignature
+     * @covers SpiffyConnect\Client\OAuth1\Client::generateSignature
      */
     public function testHmacSignatureGenerator()
     {

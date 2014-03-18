@@ -7,5 +7,5 @@ utilize the clients for their communication layer.
 
 For detailed usage information please see the client specific documentation.
 
- * [OAuth1](https://github.com/spiffyjr/spiffy-connect/tree/master/doc/Client_Oauth1.md)
- * [OAuth2](https://github.com/spiffyjr/spiffy-connect/tree/master/doc/Client_Oauth2.md)
+ * [OAuth1](https://github.com/spiffyjr/spiffy-connect/tree/master/doc/Client_OAuth1.md)
+ * [OAuth2](https://github.com/spiffyjr/spiffy-connect/tree/master/doc/Client_OAuth2.md)

@@ -1,9 +1,8 @@
 <?php
 
-namespace SpiffyConnect\Client\Oauth2;
+namespace SpiffyConnect\Client\OAuth2;
 
 use SpiffyConnect\Client\AbstractClient;
-use SpiffyConnect\Client\Oauth2\AccessToken;
 use SpiffyConnect\Client\Exception;
 use Zend\Http\Client as HttpClient;
 use Zend\Http\PhpEnvironment\Request as PhpRequest;
@@ -29,7 +28,7 @@ class Client extends AbstractClient
      * @return Response
      * @throws Exception\InvalidAccessTokenException
      */
-    public function request($uri, AccessToken $token, $method = HttpRequest::METHOD_GET, array $params = null)
+    public function request($uri, AccessToken $token, array $params = null, $method = HttpRequest::METHOD_GET)
     {
         if (!$token->isValid()) {
             throw new Exception\InvalidAccessTokenException();
@@ -40,25 +39,22 @@ class Client extends AbstractClient
 
     /**
      * @param string $uri
-     * @param AuthorizationCode $code
      * @param string $method
      * @param array|null $params
      * @return AccessToken
      */
-    public function getAccessToken($uri, AuthorizationCode $code, $method = HttpRequest::METHOD_POST, array $params = null)
+    public function getAccessToken($uri, array $params = null, $method = HttpRequest::METHOD_POST)
     {
-        $this->assertRequiredOptions(array('client_id', 'client_secret', 'redirect_uri'));
+        $this->assertRequiredOptions(array('client_id', 'client_secret'));
 
         $options = $this->getOptions();
 
-        $params['code']          = $code->getCode();
         $params['client_id']     = $options->getClientId();
         $params['client_secret'] = $options->getClientSecret();
-        $params['redirect_uri']  = $options->getRedirectUri();
 
         $client = $this->getHttpClient();
         $client->setMethod($method);
-        $client->setUri($uri);
+        $client->setUri($this->options->getBaseUri() . '/' . $uri);
         $client->setParameterPost($params);
 
         return $this->createAccessToken($client->send());
@@ -121,9 +117,10 @@ class Client extends AbstractClient
     protected function createAccessToken(Response $response)
     {
         $options    = $this->getOptions();
-        $content    = $this->decodeResponse($response, $options->getResponseFormat());
+        $content    = $this->decodeResponse($response, $options->getFormat());
         $expiresKey = $options->getExpireTimeKey();
         $accessKey  = $options->getAccessTokenKey();
+        $refreshKey = $options->getRefreshTokenKey();
 
         if (!isset($content[$accessKey])) {
             throw new Exception\InvalidAccessTokenException('missing access token from response');
@@ -132,6 +129,7 @@ class Client extends AbstractClient
         return new AccessToken(array(
             'access_token' => $content[$accessKey],
             'expire_time'  => isset($content[$expiresKey]) ? $content[$expiresKey] : null,
+            'refresh_token' => isset($content[$refreshKey]) ? $content[$refreshKey] : null,
         ));
     }
 

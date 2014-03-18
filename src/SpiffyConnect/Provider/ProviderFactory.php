@@ -8,10 +8,10 @@ class ProviderFactory
      * @var array
      */
     protected $providerClassmap = array(
-        'github'   => 'SpiffyConnect\Provider\Oauth2\GithubProvider',
-        'google'   => 'SpiffyConnect\Provider\Oauth2\GoogleProvider',
-        'facebook' => 'SpiffyConnect\Provider\Oauth2\FacebookProvider',
-        'twitter'  => 'SpiffyConnect\Provider\Oauth1\TwitterProvider'
+        'github'   => 'SpiffyConnect\Provider\OAuth2\GithubProvider',
+        'google'   => 'SpiffyConnect\Provider\OAuth2\GoogleProvider',
+        'facebook' => 'SpiffyConnect\Provider\OAuth2\FacebookProvider',
+        'twitter'  => 'SpiffyConnect\Provider\OAuth1\TwitterProvider'
     );
 
     /**

@@ -6,11 +6,11 @@ The OAuth v2 clients follow the v2 specification and is consumed by OAuth2 provi
 
 For a new client, just pass an array of configuration options to the constructor. You can modify these
 options later by using the getOptions() accessor. For an exhaustive list of options, see the OAuth2
-[ClientOptions](https://github.com/spiffyjr/spiffy-connect/tree/master/src/SpiffyConnect/Client/Oauth2/ClientOptions.php).
+[ClientOptions](https://github.com/spiffyjr/spiffy-connect/tree/master/src/SpiffyConnect/Client/OAuth2/ClientOptions.php).
 
 ```php
 <?php
-use SpiffyConnect\Client\Oauth2\Client;
+use SpiffyConnect\Client\OAuth2\Client;
 
 $client = new Client(array(
     'client_id'     => 'id',

@@ -6,11 +6,11 @@ The OAuth v1 clients follow the 1.0a specification and is consumed by OAuth1 pro
 
 For a new client, just pass an array of configuration options to the constructor. You can modify these
 options later by using the getOptions() accessor. For an exhaustive list of options, see the OAuth1
-[ClientOptions](https://github.com/spiffyjr/spiffy-connect/tree/master/src/SpiffyConnect/Client/Oauth1/ClientOptions.php).
+[ClientOptions](https://github.com/spiffyjr/spiffy-connect/tree/master/src/SpiffyConnect/Client/OAuth1/ClientOptions.php).
 
 ```php
 <?php
-use SpiffyConnect\Client\Oauth1\Client;
+use SpiffyConnect\Client\OAuth1\Client;
 
 $client = new Client(array(
     'client_id'     => 'id',

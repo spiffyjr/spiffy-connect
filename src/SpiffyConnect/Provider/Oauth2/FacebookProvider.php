@@ -1,6 +1,6 @@
 <?php
 
-namespace SpiffyConnect\Provider\Oauth2;
+namespace SpiffyConnect\Provider\OAuth2;
 
 class FacebookProvider extends AbstractProvider
 {

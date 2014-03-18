@@ -1,8 +1,8 @@
 <?php
 
-namespace SpiffyConnect\Provider\Oauth2;
+namespace SpiffyConnect\Provider\OAuth2;
 
-use SpiffyConnect\Client\Oauth2\ClientOptions;
+use SpiffyConnect\Client\OAuth2\ClientOptions;
 
 class ProviderOptions extends ClientOptions
 {

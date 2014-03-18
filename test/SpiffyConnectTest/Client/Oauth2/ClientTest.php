@@ -1,9 +1,9 @@
 <?php
 
-namespace SpiffyConnectTest\Client\Oauth2;
+namespace SpiffyConnectTest\Client\OAuth2;
 
-use SpiffyConnect\Client\Oauth2\AuthorizationCode;
-use SpiffyConnect\Client\Oauth2\Client;
+use SpiffyConnect\Client\OAuth2\AuthorizationCode;
+use SpiffyConnect\Client\OAuth2\Client;
 use Zend\Http\Client\Adapter\Test as TestAdapter;
 use Zend\Http\Request;
 use Zend\Http\Response;
@@ -11,7 +11,7 @@ use Zend\Http\Response;
 class ClientTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @cover SpiffyConnect\Client\Oauth2\Client::getAuthorizationCode
+     * @cover SpiffyConnect\Client\OAuth2\Client::getAuthorizationCode
      */
     public function testGetAuthorizationCode()
     {
@@ -21,12 +21,12 @@ class ClientTest extends \PHPUnit_Framework_TestCase
         $_GET['code'] = 'foobar';
         $client       = $this->getTestClient('empty');
         $code         = $client->getAuthorizationCode();
-        $this->assertInstanceOf('SpiffyConnect\Client\Oauth2\AuthorizationCode', $code);
+        $this->assertInstanceOf('SpiffyConnect\Client\OAuth2\AuthorizationCode', $code);
         $this->assertEquals('foobar', $code->getCode());
     }
 
     /**
-     * @cover SpiffyConnect\Client\Oauth2\Client::getAccessToken
+     * @cover SpiffyConnect\Client\OAuth2\Client::getAccessToken
      */
     public function testGetAccessToken()
     {
@@ -35,19 +35,19 @@ class ClientTest extends \PHPUnit_Framework_TestCase
 
         $client = $this->getTestClient('access_token');
         $token  = $client->getAccessToken('foo', $code);
-        $this->assertInstanceOf('SpiffyConnect\Client\Oauth2\AccessToken', $token);
+        $this->assertInstanceOf('SpiffyConnect\Client\OAuth2\AccessToken', $token);
         $this->assertEquals('foobar', $token->getAccessToken());
         $this->assertNull($token->getExpireTime());
 
         $client = $this->getTestClient('access_token_expires');
         $token  = $client->getAccessToken('foo', $code);
-        $this->assertInstanceOf('SpiffyConnect\Client\Oauth2\AccessToken', $token);
+        $this->assertInstanceOf('SpiffyConnect\Client\OAuth2\AccessToken', $token);
         $this->assertEquals('foo', $token->getAccessToken());
         $this->assertEquals('bar', $token->getExpireTime());
     }
 
     /**
-     * @cover SpiffyConnect\Client\Oauth2\Client::getRedirectResponse
+     * @cover SpiffyConnect\Client\OAuth2\Client::getRedirectResponse
      */
     public function testGetRedirectResponse()
     {
@@ -68,7 +68,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @cover SpiffyConnect\Client\Oauth2\Client::getAccessToken
+     * @cover SpiffyConnect\Client\OAuth2\Client::getAccessToken
      */
     public function testGetAccessTokenWithMissingToken()
     {
@@ -82,7 +82,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @cover SpiffyConnect\Client\Oauth2\Client::getAccessToken
+     * @cover SpiffyConnect\Client\OAuth2\Client::getAccessToken
      */
     public function testGetAccessTokenInvalidResponse()
     {

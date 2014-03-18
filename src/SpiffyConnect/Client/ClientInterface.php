@@ -3,7 +3,6 @@
 namespace SpiffyConnect\Client;
 
 use Zend\Http\Client as HttpClient;
-use Zend\Stdlib\AbstractOptions;
 
 interface ClientInterface
 {
@@ -11,7 +10,7 @@ interface ClientInterface
      * @param AbstractOptions $options
      * @return AbstractClient
      */
-    public function setOptions($options);
+    public function setOptions(AbstractOptions $options);
 
     /**
      * @return AbstractOptions

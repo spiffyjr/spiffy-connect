@@ -1,8 +1,8 @@
 <?php
 
-namespace SpiffyConnect\Client\Oauth2;
+namespace SpiffyConnect\Client\OAuth2;
 
-use Zend\Stdlib\AbstractOptions;
+use SpiffyConnect\Client\AbstractOptions;
 
 class ClientOptions extends AbstractOptions
 {
@@ -29,12 +29,12 @@ class ClientOptions extends AbstractOptions
     /**
      * @var string
      */
-    protected $responseFormat = 'json';
+    protected $accessTokenKey = 'access_token';
 
     /**
      * @var string
      */
-    protected $accessTokenKey = 'access_token';
+    protected $refreshTokenKey = 'refresh_token';
 
     /**
      * @var string
@@ -58,7 +58,6 @@ class ClientOptions extends AbstractOptions
     public function setRedirectUri($redirectUri)
     {
         $this->redirectUri = $redirectUri;
-        return $this;
     }
 
     /**
@@ -76,7 +75,6 @@ class ClientOptions extends AbstractOptions
     public function setClientSecret($clientSecret)
     {
         $this->clientSecret = $clientSecret;
-        return $this;
     }
 
     /**
@@ -94,7 +92,6 @@ class ClientOptions extends AbstractOptions
     public function setClientId($clientId)
     {
         $this->clientId = $clientId;
-        return $this;
     }
 
     /**
@@ -106,31 +103,12 @@ class ClientOptions extends AbstractOptions
     }
 
     /**
-     * @param string $responseFormat
-     * @return ClientOptions
-     */
-    public function setResponseFormat($responseFormat)
-    {
-        $this->responseFormat = $responseFormat;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getResponseFormat()
-    {
-        return $this->responseFormat;
-    }
-
-    /**
      * @param string $accessTokenKey
      * @return ClientOptions
      */
     public function setAccessTokenKey($accessTokenKey)
     {
         $this->accessTokenKey = $accessTokenKey;
-        return $this;
     }
 
     /**
@@ -148,7 +126,6 @@ class ClientOptions extends AbstractOptions
     public function setExpireTimeKey($expireTimeKey)
     {
         $this->expireTimeKey = $expireTimeKey;
-        return $this;
     }
 
     /**
@@ -166,7 +143,6 @@ class ClientOptions extends AbstractOptions
     public function setErrorKey($errorKey)
     {
         $this->errorKey = $errorKey;
-        return $this;
     }
 
     /**
@@ -184,7 +160,6 @@ class ClientOptions extends AbstractOptions
     public function setScope($scope)
     {
         $this->scope = $scope;
-        return $this;
     }
 
     /**
@@ -193,5 +168,21 @@ class ClientOptions extends AbstractOptions
     public function getScope()
     {
         return $this->scope;
+    }
+
+    /**
+     * @param string $refreshTokenKey
+     */
+    public function setRefreshTokenKey($refreshTokenKey)
+    {
+        $this->refreshTokenKey = $refreshTokenKey;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRefreshTokenKey()
+    {
+        return $this->refreshTokenKey;
     }
 }

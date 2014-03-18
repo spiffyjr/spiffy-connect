@@ -1,13 +1,13 @@
 <?php
 
-namespace SpiffyConnectTest\Client\Oauth1\Signature;
+namespace SpiffyConnectTest\Client\OAuth1\Signature;
 
-use SpiffyConnect\Client\Oauth1\Signature\HmacSha1Signature;
+use SpiffyConnect\Client\OAuth1\Signature\HmacSha1Signature;
 
 class HmacSha1SignatureTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers \SpiffyConnect\Client\Oauth1\Signature\HmacSha1Signature::sign
+     * @covers \SpiffyConnect\Client\OAuth1\Signature\HmacSha1Signature::sign
      */
     public function testSign()
     {

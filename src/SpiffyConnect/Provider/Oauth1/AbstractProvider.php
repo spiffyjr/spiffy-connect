@@ -1,10 +1,10 @@
 <?php
 
-namespace SpiffyConnect\Provider\Oauth1;
+namespace SpiffyConnect\Provider\OAuth1;
 
-use SpiffyConnect\Client\Oauth1\Client;
-use SpiffyConnect\Client\Oauth1\Token\AccessToken;
-use SpiffyConnect\Client\Oauth1\Token\RequestToken;
+use SpiffyConnect\Client\OAuth1\Client;
+use SpiffyConnect\Client\OAuth1\Token\AccessToken;
+use SpiffyConnect\Client\OAuth1\Token\RequestToken;
 use SpiffyConnect\Provider\ProviderInterface;
 use SpiffyConnect\Storage\SessionStorage;
 use SpiffyConnect\Storage\StorageInterface;
@@ -178,7 +178,7 @@ abstract class AbstractProvider implements ProviderInterface
     }
 
     /**
-     * @return \SpiffyConnect\Provider\Oauth1\TwitterOptions
+     * @return \SpiffyConnect\Provider\OAuth1\TwitterOptions
      */
     public function getOptions()
     {

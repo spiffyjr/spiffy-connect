@@ -1,6 +1,6 @@
 <?php
 
-namespace SpiffyConnect\Client\Oauth1\Token;
+namespace SpiffyConnect\Client\OAuth1\Token;
 
 interface  TokenInterface
 {

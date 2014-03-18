@@ -1,11 +1,11 @@
 <?php
 
-namespace SpiffyConnect\Provider\Oauth2;
+namespace SpiffyConnect\Provider\OAuth2;
 
-use SpiffyConnect\Client\Oauth1\ClientOptions;
-use SpiffyConnect\Client\Oauth2\AccessToken;
-use SpiffyConnect\Client\Oauth2\AuthorizationCode;
-use SpiffyConnect\Client\Oauth2\Client;
+use SpiffyConnect\Client\OAuth1\ClientOptions;
+use SpiffyConnect\Client\OAuth2\AccessToken;
+use SpiffyConnect\Client\OAuth2\AuthorizationCode;
+use SpiffyConnect\Client\OAuth2\Client;
 use SpiffyConnect\Provider\ProviderInterface;
 use SpiffyConnect\Storage\SessionStorage;
 use SpiffyConnect\Storage\StorageInterface;

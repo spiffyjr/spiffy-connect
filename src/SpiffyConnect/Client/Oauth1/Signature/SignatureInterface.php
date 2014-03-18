@@ -1,6 +1,6 @@
 <?php
 
-namespace SpiffyConnect\Client\Oauth1\Signature;
+namespace SpiffyConnect\Client\OAuth1\Signature;
 
 interface SignatureInterface
 {

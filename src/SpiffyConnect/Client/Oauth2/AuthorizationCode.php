@@ -1,6 +1,6 @@
 <?php
 
-namespace SpiffyConnect\Client\Oauth2;
+namespace SpiffyConnect\Client\OAuth2;
 
 use Zend\Stdlib\AbstractOptions;
 

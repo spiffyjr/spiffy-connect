@@ -1,6 +1,6 @@
 <?php
 
-namespace SpiffyConnect\Provider\Oauth1;
+namespace SpiffyConnect\Provider\OAuth1;
 
 use SpiffyConnect\Storage\SessionStorage;
 use Zend\Http\Client as HttpClient;

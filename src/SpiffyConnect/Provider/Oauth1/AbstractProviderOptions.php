@@ -1,8 +1,8 @@
 <?php
 
-namespace SpiffyConnect\Provider\Oauth1;
+namespace SpiffyConnect\Provider\OAuth1;
 
-use SpiffyConnect\Client\Oauth1\ClientOptions;
+use SpiffyConnect\Client\OAuth1\ClientOptions;
 
 abstract class AbstractProviderOptions extends ClientOptions
 {

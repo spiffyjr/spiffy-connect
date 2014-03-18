@@ -1,8 +1,8 @@
 <?php
 
-namespace SpiffyConnect\Client\Oauth1;
+namespace SpiffyConnect\Client\OAuth1;
 
-use Zend\Stdlib\AbstractOptions;
+use SpiffyConnect\Client\AbstractOptions;
 
 class ClientOptions extends AbstractOptions
 {

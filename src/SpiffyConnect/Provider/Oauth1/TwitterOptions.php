@@ -1,6 +1,6 @@
 <?php
 
-namespace SpiffyConnect\Provider\Oauth1;
+namespace SpiffyConnect\Provider\OAuth1;
 
 class TwitterOptions extends AbstractProviderOptions
 {

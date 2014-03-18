@@ -1,6 +1,6 @@
 <?php
 
-namespace SpiffyConnect\Provider\Oauth2;
+namespace SpiffyConnect\Provider\OAuth2;
 
 use SpiffyConnect\Profile\Profile;
 use SpiffyConnect\Profile\ProfileInterface;

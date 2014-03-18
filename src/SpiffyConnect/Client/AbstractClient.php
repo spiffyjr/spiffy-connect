@@ -3,11 +3,11 @@
 namespace SpiffyConnect\Client;
 
 use Zend\Http\Client as HttpClient;
-use Zend\Http\Client\Adapter\Curl;
 use Zend\Http\Request as HttpRequest;
 use Zend\Http\Response as HttpResponse;
+use Zend\Http\PhpEnvironment\Response as PhpResponse;
 use Zend\Json\Json;
-use Zend\Stdlib\AbstractOptions;
+use Zend\Stdlib\Response;
 
 abstract class AbstractClient implements ClientInterface
 {
@@ -25,7 +25,7 @@ abstract class AbstractClient implements ClientInterface
      * @param AbstractOptions $options
      * @return AbstractClient
      */
-    public function setOptions($options)
+    public function setOptions(AbstractOptions $options)
     {
         $this->options = $options;
         return $this;
@@ -130,11 +130,11 @@ abstract class AbstractClient implements ClientInterface
                 throw new Exception\RuntimeException(sprintf(
                     'attempting to call getter "%s" on "%s" which does not exist',
                     $getter,
-                    get_class($th)
+                    get_class($this)
                 ));
             }
 
-            if (!$this->getOptions()->{$getter}()) {
+            if (null === $this->getOptions()->{$getter}()) {
                 throw new Exception\MissingOptionException($option);
             }
         }
@@ -150,7 +150,10 @@ abstract class AbstractClient implements ClientInterface
     protected function decodeResponse(HttpResponse $response, $format = 'json')
     {
         $content = $response->getBody();
-        $status  = $response->getStatusCode();
+
+        if (HttpResponse::STATUS_CODE_200 !== $response->getStatusCode()) {
+            throw new Exception\ResponseErrorException(var_export($content, true), $response->getStatusCode());
+        }
 
         if ($content) {
             switch (strtolower($format)) {
@@ -164,10 +167,6 @@ abstract class AbstractClient implements ClientInterface
                     throw new Exception\InvalidResponseFormatException($format);
                     break;
             }
-        }
-
-        if (HttpResponse::STATUS_CODE_200 !== $status) {
-            throw new Exception\ResponseErrorException(var_export($content, true), $status);
         }
 
         return $content;
@@ -190,6 +189,7 @@ abstract class AbstractClient implements ClientInterface
         $client->reset();
         $client->setUri($uri);
         $client->setMethod($method);
+        $client->getRequest()->getHeaders()->addHeaderLine('Accept: */*');
 
         if (is_array($params)) {
             switch($method) {

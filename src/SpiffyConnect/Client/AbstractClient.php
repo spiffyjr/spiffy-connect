@@ -172,10 +172,6 @@ abstract class AbstractClient implements ClientInterface
     {
         $content = $response->getBody();
 
-        if (HttpResponse::STATUS_CODE_200 !== $response->getStatusCode()) {
-            throw new Exception\ResponseErrorException(var_export($content, true), $response->getStatusCode());
-        }
-
         if ($content) {
             switch (strtolower($format)) {
                 case 'json':

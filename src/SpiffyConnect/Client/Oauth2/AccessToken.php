@@ -42,7 +42,7 @@ class AccessToken extends AbstractOptions
      */
     public function isValid()
     {
-        return null === $this->expiresIn || (time() > $this->getCreationTime() + $this->getExpiresIn());
+        return null === $this->expiresIn || (time() < $this->getCreationTime() + $this->getExpiresIn());
     }
 
     /**

@@ -34,7 +34,9 @@ class Client extends AbstractClient
      */
     public function request($uri, array $params = null, $method = HttpRequest::METHOD_GET)
     {
-        return $this->prepareHttpClient($uri, $method, $params)->send();
+        $client = $this->prepareHttpClient($uri, $method, $params);
+
+        return $this->decodeResponse($client->send());
     }
 
     /**
@@ -72,8 +74,9 @@ class Client extends AbstractClient
 
         $token = $this->requestToken(['grant_type' => 'refresh_token', 'refresh_token' => $token->getRefreshToken()]);
         $token->setRefreshToken($refreshToken);
-
         $this->setAccessToken($token);
+
+        return $token;
     }
 
     /**
@@ -184,12 +187,14 @@ class Client extends AbstractClient
     ) {
         $token = $this->getAccessToken();
         if (!$token->isValid()) {
-            $this->requestTokenRefresh();
+            $token = $this->requestTokenRefresh();
         }
 
         $client = parent::prepareHttpClient($this->options->getBaseUri() . '/' . $uri, $method, $params);
         $headers = $client->getRequest()->getHeaders();
         $headers->addHeaderLine(sprintf('Authorization: Bearer %s', $token->getAccessToken()));
+        $headers->addHeaderLine('Content-type: application/json');
+        $headers->addHeaderLine('Accept: application/json');
 
         return $client;
     }

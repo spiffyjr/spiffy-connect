@@ -195,6 +195,7 @@ abstract class AbstractClient implements ClientInterface
      * @param $uri
      * @param string $method
      * @param array $params
+     * @throws Exception\InvalidRequestFormatException
      * @return HttpClient
      */
     protected function prepareHttpClient(
@@ -206,17 +207,17 @@ abstract class AbstractClient implements ClientInterface
         $client->reset();
         $client->setUri($uri);
         $client->setMethod($method);
-        $client->getRequest()->getHeaders()->addHeaderLine('Accept: */*');
+        $headers = $client->getRequest()->getHeaders();
 
-        if (is_array($params)) {
-            switch($method) {
-                case HttpRequest::METHOD_GET:
-                    $client->setParameterGet($params);
-                    break;
-                case HttpRequest::METHOD_POST:
-                    $client->setParameterPost($params);
-                    break;
-            }
+        switch ($this->options->getFormat()) {
+            case 'json':
+                $headers->addHeaderLine('Accept: application/json');
+                $headers->addHeaderLine('Content-type: application/json');
+                $headers->addHeaderLine('Accept: application/json');
+                $client->getRequest()->setContent(json_encode($params));
+                break;
+            default:
+                throw new Exception\InvalidRequestFormatException($this->options->getFormat());
         }
 
         return $client;

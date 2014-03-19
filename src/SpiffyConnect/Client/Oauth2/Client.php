@@ -193,8 +193,6 @@ class Client extends AbstractClient
         $client = parent::prepareHttpClient($this->options->getBaseUri() . '/' . $uri, $method, $params);
         $headers = $client->getRequest()->getHeaders();
         $headers->addHeaderLine(sprintf('Authorization: Bearer %s', $token->getAccessToken()));
-        $headers->addHeaderLine('Content-type: application/json');
-        $headers->addHeaderLine('Accept: application/json');
 
         return $client;
     }

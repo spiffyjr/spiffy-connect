@@ -27,16 +27,27 @@ class Client extends AbstractClient
 
     /**
      * @param string $uri
+     * @param array $params
      * @param string $method
-     * @param array|null $params
-     * @return Response
-     * @throws Exception\InvalidAccessTokenException
+     * @return mixed
      */
     public function request($uri, array $params = null, $method = HttpRequest::METHOD_GET)
     {
         $client = $this->prepareHttpClient($uri, $method, $params);
 
         return $this->decodeResponse($client->send());
+    }
+
+    /**
+     * @param string $uri
+     * @param array $params
+     * @param string $method
+     * @return Response
+     */
+    public function rawRequest($uri, array $params = null, $method = HttpRequest::METHOD_GET)
+    {
+        $client = $this->prepareHttpClient($uri, $method, $params);
+        return $client->send();
     }
 
     /**
@@ -62,9 +73,9 @@ class Client extends AbstractClient
     /**
      * @throws Exception\InvalidAccessTokenException
      */
-    public function requestTokenRefresh()
+    public function requestTokenRefresh(AccessToken $token = null)
     {
-        $token = $this->getAccessToken();
+        $token = $token ? $token: $this->getAccessToken();
 
         if (!$token->getRefreshToken()) {
             throw new Exception\InvalidAccessTokenException();
@@ -186,9 +197,6 @@ class Client extends AbstractClient
         array $params = null
     ) {
         $token = $this->getAccessToken();
-        if (!$token->isValid()) {
-            $token = $this->requestTokenRefresh();
-        }
 
         $client = parent::prepareHttpClient($this->options->getBaseUri() . '/' . $uri, $method, $params);
         $headers = $client->getRequest()->getHeaders();

@@ -213,7 +213,6 @@ abstract class AbstractClient implements ClientInterface
             case 'json':
                 $headers->addHeaderLine('Accept: application/json');
                 $headers->addHeaderLine('Content-type: application/json');
-                $headers->addHeaderLine('Accept: application/json');
                 $client->getRequest()->setContent(json_encode($params));
                 break;
             default:

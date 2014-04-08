@@ -34,7 +34,6 @@ class Client extends AbstractClient
     public function request($uri, array $params = null, $method = HttpRequest::METHOD_GET)
     {
         $client = $this->prepareHttpClient($uri, $method, $params);
-
         return $this->decodeResponse($client->send());
     }
 
@@ -62,11 +61,7 @@ class Client extends AbstractClient
         $params['client_id']     = $this->options->getClientId();
         $params['client_secret'] = $this->options->getClientSecret();
 
-        $client = $this->getHttpClient();
-        $client->setMethod($method);
-        $client->setUri($this->options->getBaseUri() . '/' . $this->options->getOAuthEndpoint());
-        $client->setParameterPost($params);
-
+        $client = $this->prepareHttpClient($this->options->getOAuthEndpoint(), $method, $params);
         return $this->createAccessToken($client->send());
     }
 

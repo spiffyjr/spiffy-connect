@@ -181,7 +181,7 @@ abstract class AbstractClient implements ClientInterface
                     parse_str($content, $content);
                     break;
                 default:
-                    throw new Exception\InvalidResponseFormatException($format);
+                    throw new Exception\InvalidResponseFormatException($format, $response->getBody());
                     break;
             }
         }

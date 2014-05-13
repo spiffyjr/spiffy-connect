@@ -167,7 +167,7 @@ class Client extends AbstractClient
         $refreshKey = $options->getRefreshTokenKey();
 
         if (!isset($content[$accessKey])) {
-            throw new Exception\InvalidAccessTokenException('missing access token from response');
+            throw new Exception\InvalidAccessTokenException('missing access token from response', $response->getBody());
         }
 
         return new AccessToken(array(

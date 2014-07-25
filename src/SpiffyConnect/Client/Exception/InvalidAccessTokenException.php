@@ -14,13 +14,13 @@ class InvalidAccessTokenException extends Exception\InvalidArgumentException
 
     /**
      * @param string $msg
-     * @param int $body
+     * @param string $body
      * @param int $code
      * @param \Exception $previous
      */
     public function __construct(
         $msg = "the specified access token is invalid",
-        $body,
+        $body = "",
         $code = 0,
         \Exception $previous = null
     ) {
